@@ -192,8 +192,8 @@
     <ClCompile Include="..\Library\imgui\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="..\Library\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Sourse\Block.cpp" />
+    <ClCompile Include="Sourse\Controller.cpp" />
     <ClCompile Include="Sourse\Interface.cpp" />
     <ClCompile Include="Sourse\PC.cpp" />
     <ClCompile Include="Sourse\Player.cpp" />

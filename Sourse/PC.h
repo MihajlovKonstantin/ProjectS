@@ -3,13 +3,20 @@
 class PC :
     public Player
 {
-    DirectionMove m_moveDir;
+  
     POINT* m_mouse;
+private:
+    float CalculateView();
+    bool CalculateMoveState();
+    void ImplicateInput();
+    void EliminateOppositeInput();
 public:
-    void GetMoveStatus(DirectionMove moveDir);
+    
     void SetInput(std::vector<int> input);
     void Update();
     void SetMouse(POINT* mouse);
-    float CalculateView();
+    
+    PC(KdTexture* texture, POINT* mouse);
+    PC();
 };
 

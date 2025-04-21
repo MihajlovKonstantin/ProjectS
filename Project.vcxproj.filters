@@ -249,14 +249,14 @@
     <ClCompile Include="Sourse\PC.cpp">
       <Filter>Src\Sourse\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Src\Sourse\Controller</Filter>
-    </ClCompile>
     <ClCompile Include="Sourse\Interface.cpp">
       <Filter>Src\Sourse\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Block.cpp">
+    <ClCompile Include="Sourse\Block.cpp">
       <Filter>Src\Sourse\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Sourse\Controller.cpp">
+      <Filter>Src\Sourse\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

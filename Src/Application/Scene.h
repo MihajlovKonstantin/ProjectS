@@ -15,7 +15,7 @@ private:
 
 	PC m_player;
 
-	Block m_block;
+	std::vector<Block> m_block;
 
 	KdTexture m_PCTex;
 public:

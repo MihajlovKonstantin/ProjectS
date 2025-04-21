@@ -6,8 +6,12 @@ void Scene::Draw2D()
 	SHADER.m_spriteShader.SetMatrix(m_player.GetMatrix());
 	SHADER.m_spriteShader.DrawTex(m_player.GetTexture(),Math::Rectangle(0,0,32,32));
 
-	SHADER.m_spriteShader.SetMatrix(m_block.GetMatrix());
-	SHADER.m_spriteShader.DrawTex(m_block.GetTexture(), m_block.GetRectangle());
+	for each(Block var in m_block)
+	{
+		SHADER.m_spriteShader.SetMatrix(var.GetMatrix());
+		SHADER.m_spriteShader.DrawTex(var.GetTexture(), var.GetRectangle());
+	}
+	
 }
 
 void Scene::Update()
@@ -23,6 +27,10 @@ void Scene::Update()
 			break;
 		}
 		
+	}
+	for each(Block var in m_block)
+	{
+		m_player.CollisionToBlock(var);
 	}
 	
 	switch (m_currentGM)
@@ -44,9 +52,9 @@ void Scene::Update()
 void Scene::Init()
 {
 	m_PCTex.Load("Texture/Player/PC.png");
-	m_player.SetTexture(&m_PCTex);
-	m_player.SetMouse(&APP.m_mouse);
-	m_block = Block({ 0,100 }, { 32,32 }, m_player.GetScroll(), m_player.GetTexture(), 0, 45.0f);
+	m_player = PC(&m_PCTex, &APP.m_mouse);
+	m_block.push_back ( Block({ 0,100,0 }, { 32,32 ,0}, m_player.GetScroll(), m_player.GetTexture(), 0, 0.0f));
+	m_block.push_back(Block({ 32,100,0 }, { 32,32 ,0 }, m_player.GetScroll(), m_player.GetTexture(), 0, 0.0f));
 }
 
 void Scene::Release()

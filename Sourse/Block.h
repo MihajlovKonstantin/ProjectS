@@ -1,13 +1,13 @@
 #pragma once
 class Block
 {
-	DirectX::XMFLOAT2 _scroll;
-	DirectX::XMFLOAT2* m_scroll = &_scroll;
+	DirectX::XMFLOAT3 _scroll;
+	DirectX::XMFLOAT3* m_scroll = &_scroll;
 
-	DirectX::XMFLOAT2 m_globalPos;
-	DirectX::XMFLOAT2 m_localPos;
+	DirectX::XMFLOAT3 m_globalPos;
+	DirectX::XMFLOAT3 m_localPos;
 
-	DirectX::XMFLOAT2 m_size = { 32,32 };
+	DirectX::XMFLOAT3 m_size;
 	KdTexture* m_texture;
 	Math::Matrix m_transMat, m_rotateMat, m_matrix;
 	Math::Rectangle m_rectangle;
@@ -20,9 +20,9 @@ class Block
 	DirectX::BoundingOrientedBox m_box;
 
 private:
-	void SetScroll(DirectX::XMFLOAT2* scroll);
-	void SetPos(DirectX::XMFLOAT2 pos);
-	void SetSize(DirectX::XMFLOAT2 size);
+	void SetScroll(DirectX::XMFLOAT3* scroll);
+	void SetPos(DirectX::XMFLOAT3 pos);
+	void SetSize(DirectX::XMFLOAT3 size);
 	void SetTexture(KdTexture* texture);
 	void SetBackStage(int backStage);
 	void SetRotation(float rotation);
@@ -32,11 +32,12 @@ public:
 
 	bool GetBackStage();
 	float GetRotation();
-	DirectX::XMFLOAT2 GetGlobalPos();
+	DirectX::XMFLOAT3 GetGlobalPos();
 	KdTexture* GetTexture();
+	DirectX::BoundingOrientedBox GetBox();
 
 	void SetDeleteState();
 	Block();
-	Block(DirectX::XMFLOAT2 pos, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2* scroll, KdTexture* texture, int backStage, float rotation);
+	Block(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 size, DirectX::XMFLOAT3* scroll, KdTexture* texture, int backStage, float rotation);
 };
 

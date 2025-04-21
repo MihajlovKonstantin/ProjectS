@@ -1,19 +1,21 @@
 #include "Pch.h"
 #include "Sourse/Block.h"
 
-void Block::SetScroll(DirectX::XMFLOAT2* scroll)
+void Block::SetScroll(DirectX::XMFLOAT3* scroll)
 {
 	m_scroll = scroll;
 }
 
-void Block::SetPos(DirectX::XMFLOAT2 pos)
+void Block::SetPos(DirectX::XMFLOAT3 pos)
 {
 	m_globalPos = pos;
 }
 
-void Block::SetSize(DirectX::XMFLOAT2 size)
+void Block::SetSize(DirectX::XMFLOAT3 size)
 {
-	m_size = size;
+	m_size.x = size.x/2;
+	m_size.y = size.y / 2;
+	m_size.z = size.z;
 }
 
 void Block::SetTexture(KdTexture* texture)
@@ -51,7 +53,7 @@ float Block::GetRotation()
 	return m_rotation;
 }
 
-DirectX::XMFLOAT2 Block::GetGlobalPos()
+DirectX::XMFLOAT3 Block::GetGlobalPos()
 {
 	return m_globalPos;
 }
@@ -59,6 +61,11 @@ DirectX::XMFLOAT2 Block::GetGlobalPos()
 KdTexture* Block::GetTexture()
 {
 	return m_texture;
+}
+
+DirectX::BoundingOrientedBox Block::GetBox()
+{
+	return m_box;
 }
 
 void Block::SetDeleteState()
@@ -70,7 +77,7 @@ Block::Block()
 {
 }
 
-Block::Block(DirectX::XMFLOAT2 pos, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2* scroll, KdTexture* texture, int backStage, float rotation)
+Block::Block(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 size, DirectX::XMFLOAT3* scroll, KdTexture* texture, int backStage, float rotation)
 {
 	SetPos(pos);
 	SetSize(size);
@@ -82,7 +89,7 @@ Block::Block(DirectX::XMFLOAT2 pos, DirectX::XMFLOAT2 size, DirectX::XMFLOAT2* s
 	m_matrix =Math::Matrix::CreateRotationZ(DirectX::XMConvertToRadians(rotation))* Math::Matrix::CreateTranslation(pos.x, pos.y, 0);
 	m_rectangle = Math::Rectangle(0,0,long(size.x),long( size.y));
 
-	m_box = DirectX::BoundingOrientedBox({ pos.x,pos.y,0 }, { size.x,size.y,0 }, DirectX::XMFLOAT4(0, 0, 0, 1));
+	m_box = DirectX::BoundingOrientedBox(pos, m_size, DirectX::XMFLOAT4(0, 0, 0, 1));
 	DirectX::XMVECTOR _rotationVector = DirectX::XMQuaternionRotationAxis(DirectX::XMVectorSet(0, 0, 1, 0), DirectX::XMConvertToRadians(rotation));
 	DirectX::XMStoreFloat4(&m_box.Orientation, _rotationVector);
 }
