@@ -143,7 +143,18 @@ void Player::CollisionToBlock(Block block)
 		}
 		else
 		{
-
+			if ((_centerDelta.x >= 0) && (_centerDelta.y >= 0))
+			{
+				m_moveBlock.s_left = true;
+				m_moveBlock.s_down_l = true;
+				m_moveBlock.s_down = true;
+			}
+			if ((_centerDelta.x <= 0) && (_centerDelta.y >= 0))
+			{
+				m_moveBlock.s_right = true;
+				m_moveBlock.s_down_r= true;
+				m_moveBlock.s_down = true;
+			}
 		}
 		m_sphere.Center.x = m_pos.x;
 		m_sphere.Center.y = m_pos.y;
